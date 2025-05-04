@@ -7,15 +7,15 @@ function General({
 }) {
 	return (
 		<div className="generalInfo">
-			<h1>{name}</h1>
+			<h1>{name || "Your name"}</h1>
 			<div>
 				<p>
 					<img src="/mail.svg" alt="" className="generalIcons" />{" "}
-					{mail}
+					{mail || "Your mail"}
 				</p>
 				<p>
 					<img src="/phone.svg" alt="" className="generalIcons" />{" "}
-					{phone}
+					{phone || "Your  phone number"}
 				</p>
 			</div>
 		</div>
@@ -52,8 +52,8 @@ function Experience({ nameOf, tittleOf, dateOf, position, responsibilities }) {
 	);
 }
 
-export default function CV(prop) {
-	const education = prop.edu || [
+export default function CV({prop}) {
+	const education = prop.edu.length || [
 		{
 			date: ["Entered date", "Graduation year"],
 			name: "Name of univercity",
@@ -61,13 +61,13 @@ export default function CV(prop) {
 			position: "Ohayo",
 		},
 	];
-	const workExp = prop.work || [
+	const workExp = prop.work.length || [
 		{
 			date: ["Entered date", "Leaving year"],
 			name: "Name of the job",
 			tittle: "Tittle of the job",
-			position: "",
-			res: "l",
+			position: "Nihon",
+			res: "Your responsibilities",
 		},
 	];
 

@@ -1,0 +1,35 @@
+body {
+	width: 100vw;
+}
+
+#root {
+	display: flex;
+	gap: 1rem;
+	width: 80vw;
+	margin: 0 auto;
+	>* {
+		margin: 1rem;
+		flex: 1;
+	}
+}
+
+@media screen and (min-width: 1500px) {
+	#root {
+		height: 80vh;
+		> * {
+			max-width: none	;
+			display: flex;
+			flex-direction: column;
+			input, image {
+				height: auto;
+				width: auto;
+			}
+			* {
+				font-size: calc(2rem + 0.5vw);
+			}
+			>* {
+				flex: 1;
+			}
+		}
+	}
+}

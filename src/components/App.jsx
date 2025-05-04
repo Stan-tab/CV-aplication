@@ -1,10 +1,23 @@
 import React, { useState } from 'react'
+import "../style/App.css"
 import CV from './CV'
+import GetInfo from './GetInfo'
 
-export default function App() {
+function App() {
+	const [prop, setProp] = useState({
+		name: null,
+		mail: null,
+		phone:  null,
+		edu: [],
+		work: []
+	})
+
 	return (
 		<>
-		<CV />
+		<GetInfo setProp={setProp} prop={prop} />
+		<CV prop={prop} />
 		</>
 	)
 }
+
+export default App

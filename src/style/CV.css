@@ -1,4 +1,42 @@
+.cv {
+	border: 1px solid grey;
+	max-width: 528.5px;
+	> *:not(.generalInfo) {
+		padding: 0 1rem;
+		padding-top: 1rem;
+		border-bottom: 1px solid black;
+	}
+	h3{
+		margin-top: 0;
+		margin-bottom: 0.6rem;
+	}
+}
+
 img.generalIcons {
 	vertical-align: bottom;
 }
 
+.generalInfo{
+	background-color:#607cda;
+	padding: 0 1rem;
+	padding-top: 1rem;
+	text-align: center;
+	border-bottom: 1px solid black;
+	> h1 {
+		margin: 0;
+	}
+	> div {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+}
+
+.cv .card{
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	>* {
+		flex: 1;
+	}
+}
