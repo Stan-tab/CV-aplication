@@ -52,57 +52,30 @@ function Experience({ nameOf, tittleOf, dateOf, position, responsibilities }) {
 	);
 }
 
-export default function CV({prop}) {
-	const education = prop.edu.length || [
-		{
-			date: ["Entered date", "Graduation year"],
-			name: "Name of univercity",
-			field: "Your field",
-			position: "Ohayo",
-		},
-	];
-	const workExp = prop.work.length || [
-		{
-			date: ["Entered date", "Leaving year"],
-			name: "Name of the job",
-			tittle: "Tittle of the job",
-			position: "Nihon",
-			res: "Your responsibilities",
-		},
-	];
+export default function CV({ prop }) {
+	const education = prop.edu;
+	const workExp = prop.work;
+	function getList(obj) {
+		const list = [];
+		for (const key in obj) {
+			if (Object.prototype.hasOwnProperty.call(obj, key)) {
+				const el = obj[key];
+				list.push(<Experience key={key} dateOf={el.date} nameOf={el.name} tittleOf={el.field} position={el.position} responsibilities={el.res} />);
+			}
+		}
+		return list;
+	}
 
 	return (
 		<div className="cv">
 			<General name={prop.name} mail={prop.mail} phone={prop.phone} />
 			<div className="education">
 				<h3>Educational</h3>
-				{education.map((experience) => (
-					<Experience
-						key={`${experience.name}${JSON.stringify(
-							experience.date
-						)}`}
-						dateOf={experience.date}
-						nameOf={experience.name}
-						tittleOf={experience.field}
-						position={experience.position}
-					/>
-				))}
+				{getList(education)}
 			</div>
 			<div className="practicalExp">
 				<h3>Professional Experience</h3>
-				{workExp.map((job) => {
-					if (job.res === undefined || !job) return;
-					return (
-						<Experience
-							key={`${job.name}${JSON.stringify(job.date)}`}
-							dateOf={job.date}
-							nameOf={job.name}
-							tittleOf={job.tittle}
-							position={job.position}
-							responsibilities={job.res}
-						/>
-					);
-				})}
+				{getList(workExp)}
 			</div>
 		</div>
 	);

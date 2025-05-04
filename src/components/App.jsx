@@ -8,8 +8,24 @@ function App() {
 		name: null,
 		mail: null,
 		phone:  null,
-		edu: [],
-		work: []
+		edu: {
+			id1: {
+				name: "Best univercity",
+				field: "CS",
+				position: "Ohayo",
+				date: [],
+				responcibilities: "",
+			}
+		},
+		work: {
+			id1: {
+				name: "Best job",
+				field: "CS",
+				position: "Ohayo",
+				date: [],
+				responcibilities: "",
+			}
+		}
 	})
 
 	return (

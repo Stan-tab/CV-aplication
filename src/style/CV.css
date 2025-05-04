@@ -1,10 +1,11 @@
 .cv {
 	border: 1px solid grey;
 	max-width: 528.5px;
+	min-width: 310px;
 	> *:not(.generalInfo) {
 		padding: 0 1rem;
 		padding-top: 1rem;
-		border-bottom: 1px solid black;
+		border-top: 1px solid black;
 	}
 	h3{
 		margin-top: 0;
@@ -21,7 +22,6 @@ img.generalIcons {
 	padding: 0 1rem;
 	padding-top: 1rem;
 	text-align: center;
-	border-bottom: 1px solid black;
 	> h1 {
 		margin: 0;
 	}

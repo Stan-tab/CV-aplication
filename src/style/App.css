@@ -15,21 +15,26 @@ body {
 
 @media screen and (min-width: 1500px) {
 	#root {
-		height: 80vh;
 		> * {
 			max-width: none	;
 			display: flex;
 			flex-direction: column;
-			input, image {
+			input {
 				height: auto;
 				width: auto;
 			}
+			img {
+				width: calc(1rem + 0.5vw);
+			}
 			* {
-				font-size: calc(2rem + 0.5vw);
+				font-size: calc(1rem + 0.5vw);
 			}
 			>* {
 				flex: 1;
 			}
+		}
+		.eduExp {
+			flex: none;
 		}
 	}
 }

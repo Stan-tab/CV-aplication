@@ -1,6 +1,11 @@
-import "../style/GetInfo.css"
+import "../style/GetInfo.css";
 
-function CreaetInput({ tittle, type, handler = () => console.log("Wait for handler"), id }) {
+function CreaetInput({
+	tittle,
+	type,
+	handler = () => console.log("Wait for handler"),
+	id,
+}) {
 	return (
 		<label className="inputInfo">
 			{tittle}
@@ -9,25 +14,56 @@ function CreaetInput({ tittle, type, handler = () => console.log("Wait for handl
 	);
 }
 
-export default function GetInfo({setProp, prop}) {
+export default function GetInfo({ setProp, prop }) {
 	function inputHandler(value, type) {
 		setProp({
 			...prop,
-			[type]: value
-		})
+			[type]: value,
+		});
+	}
+
+	function buttonHandler(type) {
+		prop[type].push({
+			date: ["Entered date", "Graduation year"],
+			name: "Name of univercity",
+			field: "Your field",
+			position: "",
+		});
+		setProp({
+			...prop,
+			[type]: [...prop[type]],
+		});
 	}
 
 	return (
 		<div className="inputing">
 			<div className="generalInput">
 				<h3>General</h3>
-				<CreaetInput tittle={"Your name"} type={"text"} handler={inputHandler} id={"name"} />
-				<CreaetInput tittle={"Your phone"} type={"number"} handler={inputHandler} id={"phone"} />
-				<CreaetInput tittle={"Your mail"} type={"email"} handler={inputHandler} id={"mail"} />
+				<CreaetInput
+					tittle={"Your name"}
+					type={"text"}
+					handler={inputHandler}
+					id={"name"}
+				/>
+				<CreaetInput
+					tittle={"Your phone"}
+					type={"number"}
+					handler={inputHandler}
+					id={"phone"}
+				/>
+				<CreaetInput
+					tittle={"Your mail"}
+					type={"email"}
+					handler={inputHandler}
+					id={"mail"}
+				/>
 			</div>
 			<div className="eduExp">
 				<h3>Educational</h3>
-				<button>Add univercity</button>
+				
+				<button onClick={() => buttonHandler(["edu", "name"])}>
+					Add univercity
+				</button>
 			</div>
 		</div>
 	);
