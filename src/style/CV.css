@@ -2,6 +2,7 @@
 	border: 1px solid grey;
 	max-width: 528.5px;
 	min-width: 310px;
+	height: fit-content;
 	> *:not(.generalInfo) {
 		padding: 0 1rem;
 		padding-top: 1rem;

@@ -54,6 +54,21 @@ function CreateInputs({ obj, handler, from, remover }) {
 					handler={handler}
 					id={[from, key, "responcibilities"]}
 				/>
+				<div className="time">
+					Dates
+					<CreaetInput
+						tittle={"Entered date"}
+						type={"date"}
+						handler={handler}
+						id={[from, key, "date0"]}
+					/>
+					<CreaetInput
+						tittle={"Leaved date"}
+						type={"date"}
+						handler={handler}
+						id={[from, key, "date1"]}
+					/>
+				</div>
 			</div>
 		);
 		newInputs.push(inputs);
@@ -65,6 +80,13 @@ export default function GetInfo({ setProp, prop }) {
 	const [count, setCount] = useState(2);
 	function inputHandler(value, type) {
 		if (Array.isArray(type)) {
+			if (type[2].includes("date")) {
+				prop[type[0]][type[1]].date[type[2].at(-1)] = value
+					.split("-")
+					.join("/");
+				setProp({ ...prop });
+				return;
+			}
 			const newProp = {
 				...prop,
 				[type[0]]: {
@@ -109,7 +131,7 @@ export default function GetInfo({ setProp, prop }) {
 				...prop,
 				[from]: { ...obj },
 			};
-			setProp(newObj)
+			setProp(newObj);
 		};
 	}
 
@@ -149,8 +171,13 @@ export default function GetInfo({ setProp, prop }) {
 				</button>
 			</div>
 			<div className="workExp">
-				<h3>Educational</h3>
-
+				<h3>Work experience</h3>
+				<CreateInputs
+					obj={prop.work}
+					handler={inputHandler}
+					from={"work"}
+					remover={removeElement}
+				/>
 				<button onClick={() => buttonHandler("work")}>
 					Add univercity
 				</button>
