@@ -60,7 +60,7 @@ export default function CV({ prop }) {
 		for (const key in obj) {
 			if (Object.prototype.hasOwnProperty.call(obj, key)) {
 				const el = obj[key];
-				list.push(<Experience key={key} dateOf={el.date} nameOf={el.name} tittleOf={el.field} position={el.position} responsibilities={el.res} />);
+				list.push(<Experience key={key} dateOf={el.date} nameOf={el.name} tittleOf={el.field} position={el.position} responsibilities={el.responcibilities} />);
 			}
 		}
 		return list;

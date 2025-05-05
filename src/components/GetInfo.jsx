@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "../style/GetInfo.css";
 
 function CreaetInput({
@@ -14,8 +15,69 @@ function CreaetInput({
 	);
 }
 
+function CreateInputs({ obj, handler, from, remover }) {
+	const newInputs = [];
+
+	for (const key in obj) {
+		if (!Object.prototype.hasOwnProperty.call(obj, key)) continue;
+		// const element = obj[key];
+		const inputs = (
+			<div key={key} className="inputFields">
+				<button
+					className="deleteButton"
+					aria-description="Delete company"
+					onClick={remover(from, key)}
+				>
+					X
+				</button>
+				<CreaetInput
+					tittle={"Company name"}
+					type={"text"}
+					handler={handler}
+					id={[from, key, "name"]}
+				/>
+				<CreaetInput
+					tittle={"Your field"}
+					type={"text"}
+					handler={handler}
+					id={[from, key, "field"]}
+				/>
+				<CreaetInput
+					tittle={"Your position"}
+					type={"text"}
+					handler={handler}
+					id={[from, key, "position"]}
+				/>
+				<CreaetInput
+					tittle={"Your responcibilities"}
+					type={"text"}
+					handler={handler}
+					id={[from, key, "responcibilities"]}
+				/>
+			</div>
+		);
+		newInputs.push(inputs);
+	}
+	return newInputs;
+}
+
 export default function GetInfo({ setProp, prop }) {
+	const [count, setCount] = useState(2);
 	function inputHandler(value, type) {
+		if (Array.isArray(type)) {
+			const newProp = {
+				...prop,
+				[type[0]]: {
+					...prop[type[0]],
+					[type[1]]: {
+						...prop[type[0]][type[1]],
+						[type[2]]: value,
+					},
+				},
+			};
+			setProp(newProp);
+			return;
+		}
 		setProp({
 			...prop,
 			[type]: value,
@@ -23,16 +85,32 @@ export default function GetInfo({ setProp, prop }) {
 	}
 
 	function buttonHandler(type) {
-		prop[type].push({
-			date: ["Entered date", "Graduation year"],
-			name: "Name of univercity",
-			field: "Your field",
-			position: "",
-		});
+		setCount(count + 1);
 		setProp({
 			...prop,
-			[type]: [...prop[type]],
+			[type]: {
+				...prop[type],
+				[`id${count}`]: {
+					name: "Best univercity/work",
+					field: "CS",
+					position: "Ohayo",
+					date: [],
+					responcibilities: "",
+				},
+			},
 		});
+	}
+
+	function removeElement(from, id) {
+		return function () {
+			const obj = prop[from];
+			delete obj[id];
+			const newObj = {
+				...prop,
+				[from]: { ...obj },
+			};
+			setProp(newObj)
+		};
 	}
 
 	return (
@@ -60,8 +138,20 @@ export default function GetInfo({ setProp, prop }) {
 			</div>
 			<div className="eduExp">
 				<h3>Educational</h3>
-				
-				<button onClick={() => buttonHandler(["edu", "name"])}>
+				<CreateInputs
+					obj={prop.edu}
+					handler={inputHandler}
+					from={"edu"}
+					remover={removeElement}
+				/>
+				<button onClick={() => buttonHandler("edu")}>
+					Add univercity
+				</button>
+			</div>
+			<div className="workExp">
+				<h3>Educational</h3>
+
+				<button onClick={() => buttonHandler("work")}>
 					Add univercity
 				</button>
 			</div>
